@@ -7,10 +7,10 @@ const Header = () => {
   return (
     <>
       {/* Mobile Navbar */}
-      <nav className="md:hidden flex items-center justify-between p-3 bg-primary">
+      <nav className="md:hidden flex items-center justify-between py-3 px-5 bg-primary">
         <div className="relative cursor-pointer">
-          <MdShoppingBasket className="w-7 h-7" />
-          <span className="absolute bottom-5 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm">
+          <MdShoppingBasket className="w-7 h-6 text-textColor" />
+          <span className="absolute bottom-4 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm">
             2
           </span>
         </div>
@@ -35,7 +35,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-8">
-          <ul className="flex items-center gap-8">
+          <ul className="flex items-center gap-8 text-textColor ">
             <li>
               <a href="/">Home</a>
             </li>
@@ -50,8 +50,8 @@ const Header = () => {
             </li>
           </ul>
           <div className="relative cursor-pointer">
-            <MdShoppingBasket className="w-7 h-7" />
-            <span className="absolute bottom-5 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm">
+            <MdShoppingBasket className="w-7 h-6 text-textColor" />
+            <span className="absolute bottom-4 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm">
               2
             </span>
           </div>
