@@ -5,13 +5,21 @@ const HeroCard = () => {
   return cardItems.map((item) => (
     <div
       key={item.id}
-      className="bg-cardOverlay w-52 my-3 rounded-3xl flex flex-col items-center gap-1 py-2 "
+      className="lg:w-190 p-4 bg-cardOverlay backdrop-blur-md rounded-3xl flex flex-col items-center justify-center drop-shadow-lg"
     >
-      <img className="w-24" src={item.image} alt={item.name} />
-      <h3 className="font-semibold">{item.name}</h3>
-      <p className="text-lighttextGray font-semibold">{item.flavour}</p>
-      <p>
-        <span className="text-red-600 font-semibold text-sm mr-1">$</span>
+      <img
+        className="w-20 lg:w-40 -mt-10 lg:-mt-20"
+        src={item.image}
+        alt={item.name}
+      />
+      <h3 className="text-base lg:text-xl font-semibold text-textColor mt-2 lg:mt-4">
+        {item.name}
+      </h3>
+      <p className="text=[12px] lg:text-sm text-lighttextGray font-semibold my-1 lg:my-3">
+        {item.flavour}
+      </p>
+      <p className="text-sm font-semibold text-headingColor">
+        <span className="text-xs text-red-600">$</span>
         {item.price}
       </p>
     </div>

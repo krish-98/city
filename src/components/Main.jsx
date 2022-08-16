@@ -5,7 +5,7 @@ import HeroCard from "./HeroCard"
 
 const Main = () => {
   return (
-    <main className="bg-primary grid grid-cols-1 gap-4 p-6 md:grid-cols-2">
+    <main className="bg-primary grid grid-cols-1 md:grid-cols-2 gap-2 w-full h-auto">
       <div className="flex flex-col gap-6">
         <div>
           <p className="inline-block text-orange-400 font-bold bg-orange-100 rounded-full px-3 py-1 ">
@@ -36,13 +36,13 @@ const Main = () => {
         </button>
       </div>
 
-      <div className="relative">
+      <div className="py-2 flex-1 flex items-center relative">
         <img
-          className="h-[57rem] w-full xs:h-[50%] md:h-full"
+          className="ml-auto h-420 w-full lg:w-auto lg:h-650"
           src={HeroBG}
           alt="hero-background"
         />
-        <div className="absolute top-0 left-0 flex items-center justify-center flex-wrap gap-2 xs:px-2 xs:gap-4">
+        <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center gap-4 flex-wrap py-4 lg:px-32">
           <HeroCard />
         </div>
       </div>
