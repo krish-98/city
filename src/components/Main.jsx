@@ -5,8 +5,8 @@ import HeroCard from "./HeroCard"
 
 const Main = () => {
   return (
-    <main className="bg-primary grid grid-cols-1 md:grid-cols-2 gap-2 w-full h-auto">
-      <div className="flex flex-col gap-6">
+    <main className="bg-primary grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6 py-5 px-12 ">
+      <div className="flex flex-col gap-6 border-2 border-dotted border-black">
         <div>
           <p className="inline-block text-orange-400 font-bold bg-orange-100 rounded-full px-3 py-1 ">
             Bike Delivery
@@ -18,12 +18,12 @@ const Main = () => {
           </p>
         </div>
 
-        <h1 className="text-[2.75rem] font-bold">
+        <h1 className="text-[2.75rem] font-bold lg:text-[4.5rem]">
           The Fastest Delivery in
           <span className="text-orange-500"> Your City</span>
         </h1>
 
-        <p className="text-textColor text-center">
+        <p className="text-textColor text-center lg:text-left">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero
           distinctio culpa fugit consectetur mollitia, corporis deserunt, minima
           nam soluta atque quae et quaerat repellat est magnam, placeat ullam.
@@ -31,18 +31,15 @@ const Main = () => {
           consequuntur animi placeat libero obcaecati repudiandae.
         </p>
 
-        <button className="bg-orange-400 py-3 px-6 rounded-lg">
+        <button className="bg-orange-400 py-3 px-6 rounded-lg ">
           Order Now
         </button>
       </div>
 
-      <div className="py-2 flex-1 flex items-center relative">
-        <img
-          className="ml-auto h-420 w-full lg:w-auto lg:h-650"
-          src={HeroBG}
-          alt="hero-background"
-        />
-        <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center gap-4 flex-wrap py-4 lg:px-32">
+      <div className="py-2 flex-1 flex items-center relative border-2 border-dotted border-black lg:self-start">
+        <img className="w-full" src={HeroBG} alt="hero-background" />
+
+        <div className="w-full h-full absolute top-0 left-0 flex flex-wrap items-center justify-center gap-4 py-4 lg:px-32">
           <HeroCard />
         </div>
       </div>
