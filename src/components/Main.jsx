@@ -5,7 +5,7 @@ import HeroCard from "./HeroCard"
 
 const Main = () => {
   return (
-    <main className="pt-12 lg:pt-20 bg-primary grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6 py-3 px-5 md:py-5 md:px-16">
+    <main className="pt-12 lg:pt-20 bg-primary grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6 py-3 px-5 md:py-5 md:px-12 lg:px-16">
       <div className="flex flex-col gap-6">
         <div>
           <p className="inline-block text-orange-400 font-bold bg-orange-100 rounded-full px-3 py-1 drop-shadow-xl">

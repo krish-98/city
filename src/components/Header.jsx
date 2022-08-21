@@ -1,10 +1,30 @@
-import React from "react"
-import Logo from "../assets/logo.png"
-import { MdShoppingBasket } from "react-icons/md"
-import Avatar from "../assets/avatar2.png"
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import Logo from "../assets/logo.png"
+import Avatar from "../assets/avatar2.png"
+import { MdShoppingBasket } from "react-icons/md"
+import { BsPlusSquareDotted } from "react-icons/bs"
+import { MdLogout } from "react-icons/md"
+
+import { useDispatch, useSelector } from "react-redux"
+import { signIn } from "../features/authSlice/authSlice"
 
 const Header = () => {
+  const [toggle, setToggle] = useState(false)
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
+
+  console.log(user)
+
+  const handleSignIn = () => {
+    if (!user.uid) {
+      dispatch(signIn())
+    } else if (user.uid) {
+      setToggle(!toggle)
+    }
+  }
+
   return (
     <>
       {/* Mobile Navbar */}
@@ -19,25 +39,43 @@ const Header = () => {
           </span>
         </motion.div>
 
-        <div className="flex items-center gap-2 cursor-pointer">
+        <Link to="/" className="flex items-center gap-2 cursor-pointer">
           <img className="w-8 object-contain" src={Logo} alt="site logo" />
           <h1 className="text-xl font-bold">City</h1>
-        </div>
+        </Link>
 
-        <motion.img
-          whileTap={{ scale: 0.75 }}
-          className="w-10 object-contain cursor-pointer"
-          src={Avatar}
-          alt="user-avatar"
-        />
+        <div className="relative">
+          <motion.img
+            onClick={handleSignIn}
+            whileTap={{ scale: 0.75 }}
+            className="w-10 object-contain cursor-pointer rounded-full"
+            src={user.photoURL ? user?.photoURL : Avatar}
+            alt="user-avatar"
+          />
+
+          {/* dropdown list */}
+          {toggle && (
+            <div className="absolute top-14 right-0 bg-white rounded-xl">
+              <div className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-t-xl hover:duration-500">
+                <span className="w-20">New Item</span>
+                <BsPlusSquareDotted className="w-6 h-5" />
+              </div>
+
+              <div className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-b-xl hover:duration-500">
+                <span className="w-20">Logout</span>
+                <MdLogout className="w-6 h-5" />
+              </div>
+            </div>
+          )}
+        </div>
       </nav>
 
       {/* Laptop & Desktop Navbar*/}
-      <nav className="hidden md:flex justify-between py-5 px-16 bg-primary sticky top-0">
-        <div className="flex items-center gap-2 cursor-pointer">
+      <nav className="hidden md:flex justify-between py-5 px-12 lg:px-16 bg-primary sticky top-0">
+        <Link to="/" className="flex items-center gap-2 cursor-pointer">
           <img className="w-8 object-contain" src={Logo} alt="site logo" />
           <h1 className="text-xl font-bold">City</h1>
-        </div>
+        </Link>
 
         <div className="flex items-center gap-8">
           <ul className="flex items-center gap-8 text-textColor ">
@@ -54,6 +92,7 @@ const Header = () => {
               <a href="/">Service</a>
             </li>
           </ul>
+
           <motion.div
             whileTap={{ scale: 0.75 }}
             className="relative cursor-pointer"
@@ -63,12 +102,31 @@ const Header = () => {
               2
             </span>
           </motion.div>
-          <motion.img
-            whileTap={{ scale: 0.75 }}
-            className="w-10 object-contain cursor-pointer"
-            src={Avatar}
-            alt="user-avatar"
-          />
+
+          <div className="relative">
+            <motion.img
+              onClick={handleSignIn}
+              whileTap={{ scale: 0.75 }}
+              className="w-10 object-contain cursor-pointer rounded-full"
+              src={user.photoURL ? user?.photoURL : Avatar}
+              alt="user-avatar"
+            />
+
+            {/* dropdown list */}
+            {toggle && (
+              <div className="absolute top-14 right-0 bg-white rounded-xl">
+                <div className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-t-xl hover:duration-500">
+                  <span className="w-20">New Item</span>
+                  <BsPlusSquareDotted className="w-6 h-5" />
+                </div>
+
+                <div className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-b-xl hover:duration-500">
+                  <span className="w-20">Logout</span>
+                  <MdLogout className="w-6 h-5" />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </nav>
     </>
