@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { auth } from "../../firebase.config"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 
+import { toast } from "react-toastify"
+
 const initialState = {
   user: localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
@@ -33,6 +35,14 @@ const authSlice = createSlice({
     builder.addCase(signIn.fulfilled, (state, action) => {
       state.loading = false
       state.user = action.payload
+
+      toast.success(
+        `Welcome, ${state.user.displayName}, You logged in successfully!`,
+        {
+          position: "top-left",
+          theme: "dark",
+        }
+      )
     })
 
     builder.addCase(signIn.rejected, (state) => {

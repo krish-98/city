@@ -3,7 +3,11 @@ import ReactDOM from "react-dom/client"
 import { BrowserRouter as Router } from "react-router-dom"
 import "./index.css"
 import App from "./App"
+
+// animations
 import { AnimatePresence } from "framer-motion"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 // redux
 import { Provider } from "react-redux"
@@ -15,6 +19,7 @@ root.render(
     <Provider store={store}>
       <Router>
         <AnimatePresence exitBeforeEnter>
+          <ToastContainer />
           <App />
         </AnimatePresence>
       </Router>
