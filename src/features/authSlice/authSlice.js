@@ -13,9 +13,9 @@ const initialState = {
 }
 
 export const signIn = createAsyncThunk("auth/signIn", async () => {
-  const GProvider = new GoogleAuthProvider()
+  const googleProvider = new GoogleAuthProvider()
 
-  const userCredential = await signInWithPopup(auth, GProvider)
+  const userCredential = await signInWithPopup(auth, googleProvider)
   const user = userCredential.user.providerData[0]
 
   localStorage.setItem("userInfo", JSON.stringify(user))
@@ -26,7 +26,18 @@ export const signIn = createAsyncThunk("auth/signIn", async () => {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    signOut: (state) => {
+      state.user = {}
+
+      localStorage.clear()
+
+      toast.error("User logged out successfully!", {
+        position: "top-left",
+        theme: "dark",
+      })
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(signIn.pending, (state) => {
       state.loading = true
@@ -51,5 +62,7 @@ const authSlice = createSlice({
     })
   },
 })
+
+export const { signOut } = authSlice.actions
 
 export default authSlice.reducer

@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 import Header from "./components/Header"
-import Main from "./components/Main"
-import CreateItem from "./components/CreateItem"
+import Main from "./pages/Main"
+import CreateItem from "./pages/CreateItem"
 
 function App() {
   return (

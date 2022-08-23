@@ -8,7 +8,7 @@ import { BsPlusSquareDotted } from "react-icons/bs"
 import { MdLogout } from "react-icons/md"
 
 import { useDispatch, useSelector } from "react-redux"
-import { signIn } from "../features/authSlice/authSlice"
+import { signIn, signOut } from "../features/authSlice/authSlice"
 
 const Header = () => {
   const [toggle, setToggle] = useState(false)
@@ -25,10 +25,15 @@ const Header = () => {
     }
   }
 
+  const handleSignOut = () => {
+    dispatch(signOut())
+    setToggle(!toggle)
+  }
+
   return (
     <>
       {/* Mobile Navbar */}
-      <nav className="md:hidden flex items-center justify-between py-3 px-5 bg-primary sticky top-0">
+      <nav className="md:hidden flex items-center justify-between py-3 px-5 bg-primary sticky top-0 z-40">
         <motion.div
           whileTap={{ scale: 0.75 }}
           className="relative cursor-pointer"
@@ -55,30 +60,43 @@ const Header = () => {
 
           {/* dropdown list */}
           {toggle && (
-            <div className="absolute top-14 right-0 bg-white rounded-xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.6 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.6 }}
+              className="absolute top-14 right-0 bg-white rounded-xl"
+            >
               <div className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-t-xl hover:duration-500">
                 <span className="w-20">New Item</span>
                 <BsPlusSquareDotted className="w-6 h-5" />
               </div>
 
-              <div className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-b-xl hover:duration-500">
+              <div
+                onClick={handleSignOut}
+                className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-b-xl hover:duration-500"
+              >
                 <span className="w-20">Logout</span>
                 <MdLogout className="w-6 h-5" />
               </div>
-            </div>
+            </motion.div>
           )}
         </div>
       </nav>
 
       {/* Laptop & Desktop Navbar*/}
-      <nav className="hidden md:flex justify-between py-5 px-12 lg:px-16 bg-primary sticky top-0">
+      <nav className="hidden md:flex justify-between py-5 px-12 lg:px-16 bg-primary sticky top-0 z-40">
         <Link to="/" className="flex items-center gap-2 cursor-pointer">
           <img className="w-8 object-contain" src={Logo} alt="site logo" />
           <h1 className="text-xl font-bold">City</h1>
         </Link>
 
         <div className="flex items-center gap-8">
-          <ul className="flex items-center gap-8 text-textColor ">
+          <motion.ul
+            initial={{ opacity: 0, x: 200 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 200 }}
+            className="flex items-center gap-8 text-textColor "
+          >
             <li>
               <a href="/">Home</a>
             </li>
@@ -91,7 +109,7 @@ const Header = () => {
             <li>
               <a href="/">Service</a>
             </li>
-          </ul>
+          </motion.ul>
 
           <motion.div
             whileTap={{ scale: 0.75 }}
@@ -114,17 +132,25 @@ const Header = () => {
 
             {/* dropdown list */}
             {toggle && (
-              <div className="absolute top-14 right-0 bg-white rounded-xl">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.6 }}
+                className="absolute top-14 right-0 bg-white rounded-xl"
+              >
                 <div className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-t-xl hover:duration-500">
                   <span className="w-20">New Item</span>
                   <BsPlusSquareDotted className="w-6 h-5" />
                 </div>
 
-                <div className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-b-xl hover:duration-500">
+                <div
+                  onClick={handleSignOut}
+                  className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-b-xl hover:duration-500"
+                >
                   <span className="w-20">Logout</span>
                   <MdLogout className="w-6 h-5" />
                 </div>
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
