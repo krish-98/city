@@ -66,10 +66,15 @@ const Header = () => {
               exit={{ opacity: 0, scale: 0.6 }}
               className="absolute top-14 right-0 bg-white rounded-xl"
             >
-              <div className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-t-xl hover:duration-500">
-                <span className="w-20">New Item</span>
-                <BsPlusSquareDotted className="w-6 h-5" />
-              </div>
+              {user.email === "romeomuralikrishnan@gmail.com" && (
+                <Link
+                  to="create-item"
+                  className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-t-xl hover:duration-500"
+                >
+                  <span className="w-20">New Item</span>
+                  <BsPlusSquareDotted className="w-6 h-5" />
+                </Link>
+              )}
 
               <div
                 onClick={handleSignOut}
@@ -138,10 +143,15 @@ const Header = () => {
                 exit={{ opacity: 0, scale: 0.6 }}
                 className="absolute top-14 right-0 bg-white rounded-xl"
               >
-                <div className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-t-xl hover:duration-500">
-                  <span className="w-20">New Item</span>
-                  <BsPlusSquareDotted className="w-6 h-5" />
-                </div>
+                {user.email === "romeomuralikrishnan@gmail.com" && (
+                  <Link
+                    to="create-item"
+                    className="flex items-center gap-2 py-2 px-5 hover:bg-gray-100 cursor-pointer text-textColor rounded-t-xl hover:duration-500"
+                  >
+                    <span className="w-20">New Item</span>
+                    <BsPlusSquareDotted className="w-6 h-5" />
+                  </Link>
+                )}
 
                 <div
                   onClick={handleSignOut}
