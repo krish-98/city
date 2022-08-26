@@ -18,8 +18,8 @@ root.render(
   // <React.StrictMode>
   <Provider store={store}>
     <Router>
+      <ToastContainer />
       <AnimatePresence exitBeforeEnter>
-        <ToastContainer />
         <App />
       </AnimatePresence>
     </Router>
