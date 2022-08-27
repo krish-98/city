@@ -7,13 +7,7 @@ import { GiForkKnifeSpoon } from "react-icons/gi"
 import { CgDollar } from "react-icons/cg"
 import Spinner from "../components/Spinner"
 
-import rice from "../assets/r5.png"
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from "firebase/storage"
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { storage } from "../firebase.config"
 
 const CreateItem = () => {
@@ -22,45 +16,60 @@ const CreateItem = () => {
     calories: "",
     price: "",
     category: "other",
-    imageAsset: false,
   })
-  const [fields, setfields] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [fields, setFields] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [imageAsset, setImageAsset] = useState(null)
   const [alertStatus, setAlertStatus] = useState("danger")
   const [msg, setMsg] = useState(null)
+  const [progress, setProgress] = useState(null)
 
   const onChangeHandler = (e) => {
     setInputFields({ ...inputFields, [e.target.name]: e.target.value })
   }
 
   const uploadImage = (e) => {
-    setLoading(true)
+    setIsLoading(true)
     const imageFile = e.target.files[0]
+    console.log(imageFile)
     const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`) // Creating a path to the Firebase Storage
     const uploadTask = uploadBytesResumable(storageRef, imageFile)
 
     uploadTask.on(
       "state_changed",
+
       (snapshot) => {
         const uploadProgress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log(`Upload is ${uploadProgress} progress % done`)
+        setProgress(`File is uploading ${uploadProgress.toFixed(0)} % done`)
       },
+
       (error) => {
         console.log(error)
+        setFields(true)
         setMsg("Error while uploading : Try again")
         setAlertStatus("danger")
+        setTimeout(() => {
+          setFields(false)
+          setIsLoading(false)
+        }, 4000)
       },
+
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log(`File available at ${downloadURL}`)
+          setProgress(null)
+          setImageAsset(downloadURL)
+          setIsLoading(false)
+          setFields(true)
+          setMsg("Image uploaded successfully!😊")
+          setAlertStatus("success")
+          setTimeout(() => {
+            setFields(false)
+          }, 4000)
         })
-        setAlertStatus("success")
-        setMsg("Image uploaded successfully!😊")
       }
     )
-    setLoading(false)
-    setInputFields({ ...inputFields, imageAsset: true })
   }
 
   const submitForm = (e) => {
@@ -80,7 +89,6 @@ const CreateItem = () => {
         calories: "",
         price: "",
         category: "other",
-        imageAsset: false,
       })
     } else {
       setAlertStatus("danger")
@@ -94,7 +102,7 @@ const CreateItem = () => {
         onSubmit={submitForm}
         className="flex flex-col items-center justify-center gap-6 w-[90%] md:w-[70%] mx-auto px-4 py-6 border border-gray-300 rounded-xl"
       >
-        {msg && (
+        {fields && (
           <p
             className={`text-xl text-green-500 font-bold ${
               alertStatus === "danger" && "text-red-500"
@@ -103,8 +111,9 @@ const CreateItem = () => {
             {msg}
           </p>
         )}
-
-        <h1>{JSON.stringify(inputFields)}</h1>
+        {progress && (
+          <h1 className="font-semibold text-green-300">{progress}</h1>
+        )}
         <div className="flex items-center gap-2 border-b border-b-gray-300 py-2 w-full">
           <IoFastFood className="w-5 h-5" />
           <input
@@ -132,13 +141,13 @@ const CreateItem = () => {
             ))}
         </select>
 
-        {loading ? (
+        {isLoading ? (
           <div className="py-20 px-6 md:py-40">
             <Spinner />
           </div>
         ) : (
           <>
-            {!inputFields.imageAsset ? (
+            {!imageAsset ? (
               <>
                 <label className="flex flex-col items-center border-2 border-gray-400 border-dotted w-full rounded-lg py-20 px-6 md:py-40 cursor-pointer">
                   <GoCloudUpload className="w-8 h-8 text-gray-400 hover:text-gray-500" />
@@ -160,8 +169,8 @@ const CreateItem = () => {
                   <div className="relative h-full">
                     <img
                       className="w-full h-full object-contain"
-                      src={rice}
-                      alt="uploaded image"
+                      src={imageAsset}
+                      alt="uploaded img"
                     />
                   </div>
                 </div>
