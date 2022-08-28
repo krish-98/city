@@ -5,9 +5,15 @@ import { IoFastFood } from "react-icons/io5"
 import { GoCloudUpload } from "react-icons/go"
 import { GiForkKnifeSpoon } from "react-icons/gi"
 import { CgDollar } from "react-icons/cg"
+import { BsTrash } from "react-icons/bs"
 import Spinner from "../components/Spinner"
 
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage"
 import { storage } from "../firebase.config"
 
 const CreateItem = () => {
@@ -70,6 +76,21 @@ const CreateItem = () => {
         })
       }
     )
+  }
+
+  const deleteImage = () => {
+    setIsLoading(true)
+    const deleteRef = ref(storage, imageAsset)
+    deleteObject(deleteRef).then(() => {
+      setImageAsset(null)
+      setIsLoading(false)
+      setFields(true)
+      setMsg("Image deleted successfully!")
+      setAlertStatus("success")
+      setTimeout(() => {
+        setFields(false)
+      }, 4000)
+    })
   }
 
   const submitForm = (e) => {
@@ -172,6 +193,12 @@ const CreateItem = () => {
                       src={imageAsset}
                       alt="uploaded img"
                     />
+                    <button
+                      onClick={deleteImage}
+                      className="absolute right-3 xl:right-8 xl:bottom-1 p-3 bg-red-500 rounded-full"
+                    >
+                      <BsTrash className="w-5 h-5 text-white " />
+                    </button>
                   </div>
                 </div>
               </>
