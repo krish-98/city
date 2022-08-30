@@ -15,6 +15,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage"
 import { storage } from "../firebase.config"
+import { storeItem } from "../utils/firebaseFunctions"
 
 const CreateItem = () => {
   const [inputFields, setInputFields] = useState({
@@ -43,24 +44,22 @@ const CreateItem = () => {
 
     uploadTask.on(
       "state_changed",
-
       (snapshot) => {
         const uploadProgress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         setProgress(`File is uploading ${uploadProgress.toFixed(0)} % done`)
       },
-
       (error) => {
         console.log(error)
         setFields(true)
         setMsg("Error while uploading : Try again")
         setAlertStatus("danger")
+
         setTimeout(() => {
           setFields(false)
           setIsLoading(false)
         }, 4000)
       },
-
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log(`File available at ${downloadURL}`)
@@ -70,6 +69,7 @@ const CreateItem = () => {
           setFields(true)
           setMsg("Image uploaded successfully!😊")
           setAlertStatus("success")
+
           setTimeout(() => {
             setFields(false)
           }, 4000)
@@ -81,6 +81,7 @@ const CreateItem = () => {
   const deleteImage = () => {
     setIsLoading(true)
     const deleteRef = ref(storage, imageAsset)
+
     deleteObject(deleteRef).then(() => {
       setImageAsset(null)
       setIsLoading(false)
@@ -97,24 +98,66 @@ const CreateItem = () => {
     e.preventDefault()
     const { title, calories, price, category } = inputFields
 
-    if (
-      title.trim().length > 0 &&
-      calories.trim().length > 0 &&
-      price.trim().length > 0 &&
-      category !== "other"
-    ) {
-      setAlertStatus("success")
-      setMsg("Data uploaded successfully")
-      setInputFields({
-        title: "",
-        calories: "",
-        price: "",
-        category: "other",
-      })
-    } else {
+    !imageAsset && setIsLoading(true)
+
+    try {
+      if (
+        title.trim().length > 0 &&
+        calories.trim().length > 0 &&
+        price.trim().length > 0 &&
+        category !== "other" &&
+        imageAsset
+      ) {
+        const data = {
+          id: `${Date.now()}`,
+          title: title,
+          category: category,
+          imageURL: imageAsset,
+          calories: calories,
+          qty: 1,
+          price: price,
+        }
+        storeItem(data)
+        setIsLoading(false)
+        setFields(true)
+        setAlertStatus("success")
+        setMsg("Data uploaded successfully")
+        clearFields()
+
+        setTimeout(() => {
+          setIsLoading(false)
+          setFields(false)
+        }, 4000)
+      } else {
+        setFields(true)
+        setAlertStatus("danger")
+        setMsg("All fields are required!")
+
+        setTimeout(() => {
+          setFields(false)
+          setIsLoading(false)
+        }, 4000)
+      }
+    } catch (error) {
+      console.log(error)
+      setFields(true)
+      setMsg("Error while uploading : Try again")
       setAlertStatus("danger")
-      setMsg("All fields are required!")
+      setTimeout(() => {
+        setFields(false)
+        setIsLoading(false)
+      }, 4000)
     }
+  }
+
+  const clearFields = () => {
+    setInputFields({
+      title: "",
+      calories: "",
+      price: "",
+      category: "other",
+    })
+    setImageAsset(null)
   }
 
   return (
@@ -132,6 +175,7 @@ const CreateItem = () => {
             {msg}
           </p>
         )}
+
         {progress && (
           <h1 className="font-semibold text-green-300">{progress}</h1>
         )}
