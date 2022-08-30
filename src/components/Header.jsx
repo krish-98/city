@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import Logo from "../assets/logo.png"
 import Avatar from "../assets/avatar2.png"
@@ -12,6 +12,7 @@ import { signIn, signOut } from "../features/authSlice/authSlice"
 
 const Header = () => {
   const [toggle, setToggle] = useState(false)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
 
@@ -28,6 +29,7 @@ const Header = () => {
   const handleSignOut = () => {
     dispatch(signOut())
     setToggle(!toggle)
+    navigate("/")
   }
 
   const closeDropdown = () => {
