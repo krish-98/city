@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { categories } from "../utils/categories"
 
+// Icons
 import { IoFastFood } from "react-icons/io5"
 import { GoCloudUpload } from "react-icons/go"
 import { GiForkKnifeSpoon } from "react-icons/gi"
@@ -8,6 +9,7 @@ import { CgDollar } from "react-icons/cg"
 import { BsTrash } from "react-icons/bs"
 import Spinner from "../components/Spinner"
 
+// firebase imports
 import {
   deleteObject,
   getDownloadURL,
@@ -15,7 +17,10 @@ import {
   uploadBytesResumable,
 } from "firebase/storage"
 import { storage } from "../firebase.config"
-import { storeItem } from "../utils/firebaseFunctions"
+import { getAllFoodItems, storeItem } from "../utils/firebaseFunctions"
+
+import { useDispatch } from "react-redux"
+import { getFoodItems } from "../features/foodSlice/foodSlice"
 
 const CreateItem = () => {
   const [inputFields, setInputFields] = useState({
@@ -30,6 +35,7 @@ const CreateItem = () => {
   const [alertStatus, setAlertStatus] = useState("danger")
   const [msg, setMsg] = useState(null)
   const [progress, setProgress] = useState(null)
+  const dispatch = useDispatch()
 
   const onChangeHandler = (e) => {
     setInputFields({ ...inputFields, [e.target.name]: e.target.value })
@@ -148,6 +154,7 @@ const CreateItem = () => {
         setIsLoading(false)
       }, 4000)
     }
+    fetchFoodData()
   }
 
   const clearFields = () => {
@@ -158,6 +165,10 @@ const CreateItem = () => {
       category: "other",
     })
     setImageAsset(null)
+  }
+
+  const fetchFoodData = async () => {
+    getAllFoodItems().then((data) => dispatch(getFoodItems(data)))
   }
 
   return (
