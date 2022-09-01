@@ -1,24 +1,46 @@
 import React from "react"
+import { motion } from "framer-motion"
 import { IoMdBasket } from "react-icons/io"
 import { CgDollar } from "react-icons/cg"
+import NotFound from "../assets/NotFound.svg"
 
 import { useSelector } from "react-redux"
 
-const FruitsRow = () => {
+const FruitsRow = ({ flag, rowContainerRef }) => {
   const { foodItems } = useSelector((state) => state.food)
 
-  const filteredFruits = foodItems?.filter((item) => item.category === "fruits")
+  const filteredFruits = foodItems
+    ?.filter((item) => item.category === "fruits")
+    .reverse()
 
   return (
-    <div className="w-full my-12 flex items-center gap-4 overflow-x-scroll ">
-      {filteredFruits &&
+    <div
+      ref={rowContainerRef}
+      className={`w-full my-12 flex items-center gap-4 scroll-smooth ${
+        flag
+          ? "overflow-x-scroll scrollbar-none"
+          : "overflow-x-hidden flex-wrap justify-center"
+      } }  `}
+    >
+      {filteredFruits ? (
         filteredFruits?.map((fruit) => (
-          <div className="bg-white w-full md:min-w-[350px] max-h-[200px] p-2 rounded-xl hover:bg-primary ">
-            <div key={fruit.id} className="flex justify-between items-center">
-              <img className="w-40" src={fruit?.imageURL} alt={fruit?.title} />
-              <div className="bg-cartNumBg p-2 rounded-full cursor-pointer">
+          <div
+            key={fruit.id}
+            className="w-300 min-w-[300px] md:w-[340px] md:min-w-[340px]  p-2 bg-cardOverlay rounded-xl backdrop-blur-lg hover:bg-primary hover:drop-shadow-lg"
+          >
+            <div className="w-full flex justify-between items-center">
+              <motion.img
+                whileHover={{ scale: 1.2 }}
+                className="w-40 h-36 object-contain"
+                src={fruit?.imageURL}
+                alt={fruit?.title}
+              />
+              <motion.div
+                whileTap={{ scale: 0.75 }}
+                className="bg-cartNumBg p-2 rounded-full cursor-pointer hover:shadow-md"
+              >
                 <IoMdBasket className="w-5 h-5 text-white" />
-              </div>
+              </motion.div>
             </div>
 
             <div className="flex flex-col items-end">
@@ -32,7 +54,12 @@ const FruitsRow = () => {
               </div>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <>
+          <img className="w-[30%] mx-auto" src={NotFound} alt="not found" />
+        </>
+      )}
     </div>
   )
 }

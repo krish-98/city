@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import { motion } from "framer-motion"
 import Delivery from "../assets/delivery.png"
 import HeroBG from "../assets/heroBg.png"
@@ -9,6 +9,12 @@ import { IoIosArrowBack } from "react-icons/io"
 import FruitsRow from "../components/FruitsRow"
 
 const Main = () => {
+  const rowContainerRef = useRef()
+
+  const scrollTo = (scrollOffset) => {
+    rowContainerRef.current.scrollLeft += scrollOffset
+  }
+
   return (
     <main id="#home">
       <div className="bg-primary py-3 px-5 md:py-5 md:px-12 lg:px-16">
@@ -53,6 +59,7 @@ const Main = () => {
         </section> */}
         </div>
 
+        {/* Fruit section */}
         <section className="my-12">
           <div className="flex justify-between items-center">
             <p className="text-2xl font-semibold relative before:content-[''] before:absolute before:top-9 before:w-32 before:h-[.3rem] before:bg-gradient-to-r before:from-orange-400 before:to-orange-300 before:rounded-lg">
@@ -61,12 +68,15 @@ const Main = () => {
             <div className="hidden md:flex items-center gap-4">
               <motion.div
                 whileTap={{ scale: 0.75 }}
+                onClick={() => scrollTo(-300)}
                 className="bg-orange-400 p-2 rounded-lg cursor-pointer"
               >
                 <IoIosArrowBack className="text-white" />
               </motion.div>
+
               <motion.div
                 whileTap={{ scale: 0.75 }}
+                onClick={() => scrollTo(300)}
                 className="bg-orange-400 p-2 rounded-lg cursor-pointer"
               >
                 <IoIosArrowForward className="text-white" />
@@ -74,7 +84,7 @@ const Main = () => {
             </div>
           </div>
 
-          <FruitsRow />
+          <FruitsRow flag={true} rowContainerRef={rowContainerRef} />
         </section>
       </div>
     </main>
