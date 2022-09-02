@@ -26,12 +26,12 @@ const FruitsRow = ({ flag, rowContainerRef }) => {
         filteredFruits?.map((fruit) => (
           <div
             key={fruit.id}
-            className="w-300 min-w-[300px] md:w-[340px] md:min-w-[340px]  p-2 bg-cardOverlay rounded-xl backdrop-blur-lg hover:bg-primary hover:drop-shadow-lg"
+            className="w-300 min-w-[300px] md:w-[340px] md:min-w-[340px]  p-2 bg-cardOverlay rounded-xl backdrop-blur-lg hover:bg-primary hover:drop-shadow-lg my-8"
           >
             <div className="w-full flex justify-between items-center">
               <motion.img
                 whileHover={{ scale: 1.2 }}
-                className="w-40 h-36 object-contain"
+                className="w-40 h-36 object-contain -mt-8"
                 src={fruit?.imageURL}
                 alt={fruit?.title}
               />

@@ -7,6 +7,7 @@ import HeroCard from "../components/HeroCard"
 import { IoIosArrowForward } from "react-icons/io"
 import { IoIosArrowBack } from "react-icons/io"
 import FruitsRow from "../components/FruitsRow"
+import MenuContainer from "../components/MenuContainer"
 
 const Main = () => {
   const rowContainerRef = useRef()
@@ -18,6 +19,7 @@ const Main = () => {
   return (
     <main id="#home">
       <div className="bg-primary py-3 px-5 md:py-5 md:px-12 lg:px-16">
+        {/* Hero Section */}
         <div className="pt-12 lg:pt-20 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6 ">
           <section className="flex flex-col gap-6">
             <div>
@@ -59,7 +61,7 @@ const Main = () => {
         </section> */}
         </div>
 
-        {/* Fruit section */}
+        {/* Fruit Section */}
         <section className="my-12">
           <div className="flex justify-between items-center">
             <p className="text-2xl font-semibold relative before:content-[''] before:absolute before:top-9 before:w-32 before:h-[.3rem] before:bg-gradient-to-r before:from-orange-400 before:to-orange-300 before:rounded-lg">
@@ -86,6 +88,9 @@ const Main = () => {
 
           <FruitsRow flag={true} rowContainerRef={rowContainerRef} />
         </section>
+
+        {/* Menu Section */}
+        <MenuContainer />
       </div>
     </main>
   )
