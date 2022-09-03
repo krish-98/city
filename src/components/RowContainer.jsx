@@ -4,15 +4,7 @@ import { IoMdBasket } from "react-icons/io"
 import { CgDollar } from "react-icons/cg"
 import NotFound from "../assets/NotFound.svg"
 
-import { useSelector } from "react-redux"
-
-const FruitsRow = ({ flag, rowContainerRef }) => {
-  const { foodItems } = useSelector((state) => state.food)
-
-  const filteredFruits = foodItems
-    ?.filter((item) => item.category === "fruits")
-    .reverse()
-
+const RowContainer = ({ flag, rowContainerRef, data }) => {
   return (
     <div
       ref={rowContainerRef}
@@ -22,8 +14,8 @@ const FruitsRow = ({ flag, rowContainerRef }) => {
           : "overflow-x-hidden flex-wrap justify-center"
       } }  `}
     >
-      {filteredFruits ? (
-        filteredFruits?.map((fruit) => (
+      {data ? (
+        data?.map((fruit) => (
           <div
             key={fruit.id}
             className="w-300 min-w-[300px] md:w-[340px] md:min-w-[340px]  p-2 bg-cardOverlay rounded-xl backdrop-blur-lg hover:bg-primary hover:drop-shadow-lg my-8"
@@ -64,4 +56,4 @@ const FruitsRow = ({ flag, rowContainerRef }) => {
   )
 }
 
-export default FruitsRow
+export default RowContainer
