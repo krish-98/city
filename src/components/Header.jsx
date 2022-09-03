@@ -9,12 +9,15 @@ import { MdLogout } from "react-icons/md"
 
 import { useDispatch, useSelector } from "react-redux"
 import { signIn, signOut } from "../features/authSlice/authSlice"
+import CartUI from "./cart/CartUI"
+import { showCart } from "../features/cartSlice/cartSlice"
 
 const Header = () => {
   const [toggle, setToggle] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
+  const { toggleCart } = useSelector((state) => state.cart)
 
   console.log(user)
 
@@ -42,6 +45,7 @@ const Header = () => {
       <nav className="md:hidden flex items-center justify-between py-3 px-5 bg-primary sticky top-0 z-40">
         <motion.div
           whileTap={{ scale: 0.75 }}
+          onClick={() => dispatch(showCart())}
           className="relative cursor-pointer"
         >
           <MdShoppingBasket className="w-7 h-6 text-textColor" />
@@ -125,6 +129,8 @@ const Header = () => {
 
           <motion.div
             whileTap={{ scale: 0.75 }}
+            // onClick={() => setShowCart(!showCart)}
+            onClick={() => dispatch(showCart())}
             className="relative cursor-pointer"
           >
             <MdShoppingBasket className="w-7 h-6 text-textColor" />
@@ -173,6 +179,8 @@ const Header = () => {
           </div>
         </div>
       </nav>
+
+      {toggleCart && <CartUI />}
     </>
   )
 }
