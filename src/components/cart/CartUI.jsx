@@ -7,6 +7,7 @@ import EmptyCart from "../../assets/emptyCart.svg"
 import { useDispatch, useSelector } from "react-redux"
 import {
   clearCart,
+  decreaseQty,
   increaseQty,
   showCart,
 } from "../../features/cartSlice/cartSlice"
@@ -43,7 +44,7 @@ const CartUI = () => {
       </div>
 
       {/* Cart Section */}
-      {cartItems.length > 0 ? (
+      {cartItems?.length > 0 ? (
         <div className="bg-black rounded-t-[2rem] h-full">
           <div>
             {/* Cart items */}
@@ -66,7 +67,10 @@ const CartUI = () => {
                       <p>$ {item?.price}</p>
                     </div>
                     <div className="flex items-center gap-4">
-                      <span className="cursor-pointer">
+                      <span
+                        onClick={() => dispatch(decreaseQty(item))}
+                        className="cursor-pointer"
+                      >
                         <AiOutlineMinus />
                       </span>
                       <span>{item.qty}</span>

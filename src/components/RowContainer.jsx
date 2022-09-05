@@ -8,11 +8,6 @@ import { addToCart } from "../features/cartSlice/cartSlice"
 
 const RowContainer = ({ flag, rowContainerRef, data }) => {
   const dispatch = useDispatch()
-  console.log(data)
-
-  // const filterData = () => {
-  //   data.indexOf()
-  // }
 
   return (
     <div
