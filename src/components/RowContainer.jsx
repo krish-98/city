@@ -3,8 +3,17 @@ import { motion } from "framer-motion"
 import { IoMdBasket } from "react-icons/io"
 import { CgDollar } from "react-icons/cg"
 import NotFound from "../assets/NotFound.svg"
+import { useDispatch } from "react-redux"
+import { addToCart } from "../features/cartSlice/cartSlice"
 
 const RowContainer = ({ flag, rowContainerRef, data }) => {
+  const dispatch = useDispatch()
+  console.log(data)
+
+  // const filterData = () => {
+  //   data.indexOf()
+  // }
+
   return (
     <div
       ref={rowContainerRef}
@@ -29,6 +38,7 @@ const RowContainer = ({ flag, rowContainerRef, data }) => {
               />
               <motion.div
                 whileTap={{ scale: 0.75 }}
+                onClick={() => dispatch(addToCart(fruit))}
                 className="bg-cartNumBg p-2 rounded-full cursor-pointer hover:shadow-md"
               >
                 <IoMdBasket className="w-5 h-5 text-white" />

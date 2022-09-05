@@ -10,9 +10,12 @@ import RowContainer from "../components/RowContainer"
 import MenuContainer from "../components/MenuContainer"
 import { useSelector } from "react-redux"
 
+import CartUI from "../components/cart/CartUI"
+
 const Main = () => {
   const rowContainerRef = useRef()
   const { foodItems } = useSelector((state) => state.food)
+  const { toggleCart } = useSelector((state) => state.cart)
 
   const scrollTo = (scrollOffset) => {
     rowContainerRef.current.scrollLeft += scrollOffset
@@ -99,6 +102,8 @@ const Main = () => {
 
         {/* Menu Section */}
         <MenuContainer />
+
+        {toggleCart && <CartUI />}
       </div>
     </main>
   )

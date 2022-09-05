@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import Logo from "../assets/logo.png"
@@ -9,7 +9,6 @@ import { MdLogout } from "react-icons/md"
 
 import { useDispatch, useSelector } from "react-redux"
 import { signIn, signOut } from "../features/authSlice/authSlice"
-import CartUI from "./cart/CartUI"
 import { showCart } from "../features/cartSlice/cartSlice"
 
 const Header = () => {
@@ -17,9 +16,11 @@ const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
-  const { toggleCart } = useSelector((state) => state.cart)
+  const { cartItems } = useSelector((state) => state.cart)
 
   console.log(user)
+
+  useEffect(() => {}, [cartItems])
 
   const handleSignIn = () => {
     if (!user.uid) {
@@ -49,9 +50,11 @@ const Header = () => {
           className="relative cursor-pointer"
         >
           <MdShoppingBasket className="w-7 h-6 text-textColor" />
-          <span className="absolute bottom-4 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm">
-            2
-          </span>
+          {cartItems.length > 0 && (
+            <span className="absolute bottom-4 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm font-medium">
+              {cartItems.length}
+            </span>
+          )}
         </motion.div>
 
         <Link to="/" className="flex items-center gap-2 cursor-pointer">
@@ -129,14 +132,15 @@ const Header = () => {
 
           <motion.div
             whileTap={{ scale: 0.75 }}
-            // onClick={() => setShowCart(!showCart)}
             onClick={() => dispatch(showCart())}
             className="relative cursor-pointer"
           >
             <MdShoppingBasket className="w-7 h-6 text-textColor" />
-            <span className="absolute bottom-4 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm">
-              2
-            </span>
+            {cartItems.length > 0 && (
+              <span className="absolute bottom-4 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm">
+                {cartItems.length}
+              </span>
+            )}
           </motion.div>
 
           <div className="relative">
@@ -179,8 +183,6 @@ const Header = () => {
           </div>
         </div>
       </nav>
-
-      {toggleCart && <CartUI />}
     </>
   )
 }
