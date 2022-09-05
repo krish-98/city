@@ -5,7 +5,7 @@ import { BsArrowLeft } from "react-icons/bs"
 import EmptyCart from "../../assets/emptyCart.svg"
 
 import { useDispatch, useSelector } from "react-redux"
-import { showCart } from "../../features/cartSlice/cartSlice"
+import { increaseQty, showCart } from "../../features/cartSlice/cartSlice"
 
 const CartUI = () => {
   const dispatch = useDispatch()
@@ -62,9 +62,11 @@ const CartUI = () => {
                       <span className="cursor-pointer">
                         <AiOutlineMinus />
                       </span>
-                      <span>1</span>
+                      <span>{item.qty}</span>
                       <span className="cursor-pointer">
-                        <AiOutlinePlus />
+                        <AiOutlinePlus
+                          onClick={() => dispatch(increaseQty(item))}
+                        />
                       </span>
                     </div>
                   </div>

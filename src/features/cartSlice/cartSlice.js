@@ -28,8 +28,20 @@ const cartSlice = createSlice({
 
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
     },
+
+    increaseQty: (state, action) => {
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      )
+
+      if (state.cartItems[itemIndex].qty >= 1) {
+        state.cartItems[itemIndex].qty += 1
+      }
+
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
+    },
   },
 })
 
-export const { showCart, addToCart } = cartSlice.actions
+export const { showCart, addToCart, increaseQty } = cartSlice.actions
 export default cartSlice.reducer
