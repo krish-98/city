@@ -5,7 +5,11 @@ import { BsArrowLeft } from "react-icons/bs"
 import EmptyCart from "../../assets/emptyCart.svg"
 
 import { useDispatch, useSelector } from "react-redux"
-import { increaseQty, showCart } from "../../features/cartSlice/cartSlice"
+import {
+  clearCart,
+  increaseQty,
+  showCart,
+} from "../../features/cartSlice/cartSlice"
 
 const CartUI = () => {
   const dispatch = useDispatch()
@@ -28,9 +32,12 @@ const CartUI = () => {
         <h1 className="text-xl font-semibold">Cart</h1>
         <motion.div
           whileTap={{ scale: 0.75 }}
+          onClick={() => {
+            dispatch(clearCart())
+          }}
           className="flex items-center gap-2 bg-gray-200 px-2 py-1 rounded-lg cursor-pointer"
         >
-          <p className="">Clear</p>
+          <p>Clear</p>
           <AiOutlineClear className="w-5 h-5" />
         </motion.div>
       </div>
@@ -63,10 +70,11 @@ const CartUI = () => {
                         <AiOutlineMinus />
                       </span>
                       <span>{item.qty}</span>
-                      <span className="cursor-pointer">
-                        <AiOutlinePlus
-                          onClick={() => dispatch(increaseQty(item))}
-                        />
+                      <span
+                        onClick={() => dispatch(increaseQty(item))}
+                        className="cursor-pointer"
+                      >
+                        <AiOutlinePlus />
                       </span>
                     </div>
                   </div>

@@ -13,6 +13,7 @@ const cartSlice = createSlice({
     showCart: (state, action) => {
       state.toggleCart = !state.toggleCart
     },
+
     addToCart: (state, action) => {
       const itemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
@@ -37,11 +38,16 @@ const cartSlice = createSlice({
       if (state.cartItems[itemIndex].qty >= 1) {
         state.cartItems[itemIndex].qty += 1
       }
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
+    },
+
+    clearCart: (state, action) => {
+      state.cartItems = []
 
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
     },
   },
 })
 
-export const { showCart, addToCart, increaseQty } = cartSlice.actions
+export const { showCart, addToCart, increaseQty, clearCart } = cartSlice.actions
 export default cartSlice.reducer

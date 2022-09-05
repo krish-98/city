@@ -9,7 +9,7 @@ import { MdLogout } from "react-icons/md"
 
 import { useDispatch, useSelector } from "react-redux"
 import { signIn, signOut } from "../features/authSlice/authSlice"
-import { showCart } from "../features/cartSlice/cartSlice"
+import { clearCart, showCart } from "../features/cartSlice/cartSlice"
 
 const Header = () => {
   const [toggle, setToggle] = useState(false)
@@ -32,6 +32,7 @@ const Header = () => {
 
   const handleSignOut = () => {
     dispatch(signOut())
+    dispatch(clearCart())
     setToggle(!toggle)
     navigate("/")
   }
