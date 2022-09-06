@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { motion } from "framer-motion"
 import { AiOutlineClear, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 import { BsArrowLeft } from "react-icons/bs"
@@ -8,15 +8,22 @@ import { useDispatch, useSelector } from "react-redux"
 import {
   clearCart,
   decreaseQty,
+  getTotals,
   increaseQty,
   showCart,
 } from "../../features/cartSlice/cartSlice"
 
 const CartUI = () => {
   const dispatch = useDispatch()
-  const { cartItems } = useSelector((state) => state.cart)
+  const { cartItems, cartTotalAmount, cartTotalQuantity } = useSelector(
+    (state) => state.cart
+  )
 
   const reversed = [...cartItems].reverse()
+
+  useEffect(() => {
+    dispatch(getTotals())
+  }, [cartItems, dispatch])
 
   return (
     <motion.div
@@ -30,7 +37,7 @@ const CartUI = () => {
         <div onClick={() => dispatch(showCart())} className="cursor-pointer">
           <BsArrowLeft className="w-5 h-5" />
         </div>
-        <h1 className="text-xl font-semibold">Cart</h1>
+        <h1 className="text-xl font-semibold">Cart ({cartTotalQuantity})</h1>
         <motion.div
           whileTap={{ scale: 0.75 }}
           onClick={() => {
@@ -64,7 +71,7 @@ const CartUI = () => {
                     </div>
                     <div className="mr-auto">
                       <p className="mb-1">{item?.title}</p>
-                      <p>$ {item?.price}</p>
+                      <p>$ {(item?.price * item?.qty).toFixed()}</p>
                     </div>
                     <div className="flex items-center gap-4">
                       <span
@@ -91,16 +98,16 @@ const CartUI = () => {
             <div className="flex flex-col gap-7">
               <div className="flex justify-between text-xl text-cardOverlay">
                 <p>Sub Total</p>
-                <p>$ 1902</p>
+                <p>$ {cartTotalAmount.toFixed(2)}</p>
               </div>
               <div className="flex justify-between text-xl text-cardOverlay">
                 <p>Delivery</p>
-                <p>$ 24</p>
+                <p>$ 30</p>
               </div>
               <hr />
               <div className="flex justify-between text-xl font-semibold text-white">
                 <p>Total</p>
-                <p>$ 1990.56</p>
+                <p>$ {(cartTotalAmount * 30).toFixed(2)}</p>
               </div>
 
               <button className="bg-gradient-to-tr from-orange-500 to-orange-600 text-white font-medium text-xl py-2 rounded-3xl">

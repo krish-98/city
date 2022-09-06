@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux"
 import { getAllFoodItems } from "./utils/firebaseFunctions"
 import { getFoodItems } from "./features/foodSlice/foodSlice"
 import { useEffect } from "react"
+import { getTotals } from "./features/cartSlice/cartSlice"
 
 function App() {
   const dispatch = useDispatch()
@@ -19,6 +20,7 @@ function App() {
 
   useEffect(() => {
     fetchFoodData()
+    dispatch(getTotals())
   }, [])
 
   return (
