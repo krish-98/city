@@ -107,7 +107,7 @@ const CartUI = () => {
               <hr />
               <div className="flex justify-between text-xl font-semibold text-white">
                 <p>Total</p>
-                <p>$ {(cartTotalAmount * 30).toFixed(2)}</p>
+                <p>$ {(cartTotalAmount + 30).toFixed(2)}</p>
               </div>
 
               <button className="bg-gradient-to-tr from-orange-500 to-orange-600 text-white font-medium text-xl py-2 rounded-3xl">
