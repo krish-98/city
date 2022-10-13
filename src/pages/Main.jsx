@@ -26,7 +26,7 @@ const Main = () => {
       <div className="bg-primary py-3 px-5 md:py-5 md:px-12 lg:px-16">
         {/* Hero Section */}
         <div className="pt-12 lg:pt-20 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6 ">
-          <section className="flex flex-col gap-6">
+          <section className="flex flex-1 flex-col gap-6">
             <div>
               <p className="inline-block text-orange-400 font-bold bg-orange-100 rounded-full px-3 py-1 drop-shadow-xl">
                 Bike Delivery
@@ -57,15 +57,18 @@ const Main = () => {
             </button>
           </section>
 
-          {/* <section className="py-2 flex-1 flex items-center relative border-2 border-dotted border-black lg:self-start">
-          <img className="w-full" src={HeroBG} alt="hero-background" />
+          <section className="py-2 flex-1 flex items-center relative xs:items-start">
+            <img
+              className="w-full xs:h-[50%]"
+              src={HeroBG}
+              alt="hero-background"
+            />
 
-          <div className="w-full h-full absolute top-0 left-0 flex flex-wrap items-center justify-center gap-4 py-4 lg:px-32">
-            <HeroCard />
-          </div>
-        </section> */}
+            <div className="h-full xs:h-[50%] absolute top-0 left-0 flex flex-wrap items-center justify-center gap-4 py-4 lg:px-32">
+              <HeroCard />
+            </div>
+          </section>
         </div>
-
         {/* Fruit Section */}
         <section className="my-12">
           <div className="flex justify-between items-center">
@@ -99,10 +102,9 @@ const Main = () => {
               .reverse()}
           />
         </section>
-
         {/* Menu Section */}
         <MenuContainer />
-
+        ``
         {toggleCart && <CartUI />}
       </div>
     </main>
