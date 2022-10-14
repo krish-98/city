@@ -57,9 +57,9 @@ const Main = () => {
             </button>
           </section>
 
-          <section className="py-2 flex-1 flex items-center relative lg:justify-end xl:bottom-10">
+          <section className="py-2 flex-1 flex items-center relative lg:justify-end ">
             <img
-              className="w-full xs:h-[400px] md:scale-y-125 lg:w-[400px] lg:scale-y-150"
+              className="w-full xs:h-[400px] md:scale-y-125 lg:w-[400px] lg:scale-y-[1.4]"
               src={HeroBG}
               alt="hero-background"
             />
