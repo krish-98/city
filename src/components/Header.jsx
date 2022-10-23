@@ -15,12 +15,13 @@ const Header = () => {
   const [toggle, setToggle] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
   const { user } = useSelector((state) => state.auth)
-  const { cartItems } = useSelector((state) => state.cart)
+  const { cartItems, cartTotalQuantity } = useSelector((state) => state.cart)
 
-  console.log(user)
+  // console.log(user)
 
-  useEffect(() => {}, [cartItems])
+  useEffect(() => {}, [cartItems, cartTotalQuantity])
 
   const handleSignIn = () => {
     if (!user.uid) {
@@ -51,9 +52,9 @@ const Header = () => {
           className="relative cursor-pointer"
         >
           <MdShoppingBasket className="w-7 h-6 text-textColor" />
-          {cartItems.length > 0 && (
+          {cartTotalQuantity > 0 && (
             <span className="absolute bottom-4 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm font-medium">
-              {cartItems.length}
+              {cartTotalQuantity}
             </span>
           )}
         </motion.div>
@@ -137,9 +138,9 @@ const Header = () => {
             className="relative cursor-pointer"
           >
             <MdShoppingBasket className="w-7 h-6 text-textColor" />
-            {cartItems.length > 0 && (
+            {cartTotalQuantity > 0 && (
               <span className="absolute bottom-4 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm">
-                {cartItems.length}
+                {cartTotalQuantity}
               </span>
             )}
           </motion.div>
