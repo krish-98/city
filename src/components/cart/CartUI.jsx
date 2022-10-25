@@ -110,9 +110,9 @@ const CartUI = () => {
                 <p>$ {(cartTotalAmount + 30).toFixed(2)}</p>
               </div>
 
-              <button className="bg-gradient-to-tr from-orange-500 to-orange-600 text-white font-medium text-xl py-2 rounded-3xl">
+              <Link className="bg-gradient-to-tr from-orange-500 to-orange-600 text-white font-medium text-xl py-2 rounded-3xl">
                 Check Out
-              </button>
+              </Link>
             </div>
           </div>
         </div>
