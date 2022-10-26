@@ -175,7 +175,7 @@ const CreateItem = () => {
     <div className="flex items-center justify-center bg-primary h-screen">
       <form
         onSubmit={submitForm}
-        className="flex flex-col items-center justify-center gap-6 w-[90%] md:w-[70%] mx-auto px-4 py-6 border border-gray-300 rounded-xl"
+        className="flex flex-col items-center justify-center gap-6 w-[90%] md:max-w-[768px] px-4 py-6 border border-gray-300 rounded-xl"
       >
         {fields && (
           <p
