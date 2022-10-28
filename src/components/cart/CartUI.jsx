@@ -12,12 +12,12 @@ import {
   increaseQty,
   showCart,
 } from "../../features/cartSlice/cartSlice"
+import { Link } from "react-router-dom"
 
 const CartUI = () => {
   const dispatch = useDispatch()
-  const { cartItems, cartTotalAmount, cartTotalQuantity } = useSelector(
-    (state) => state.cart
-  )
+  const { cartItems, cartTotalAmount, cartTotalQuantity, toggleCart } =
+    useSelector((state) => state.cart)
 
   const reversed = [...cartItems].reverse()
 
@@ -110,8 +110,12 @@ const CartUI = () => {
                 <p>$ {(cartTotalAmount + 30).toFixed(2)}</p>
               </div>
 
-              <Link className="bg-gradient-to-tr from-orange-500 to-orange-600 text-white font-medium text-xl py-2 rounded-3xl">
-                Check Out
+              <Link
+                to="/checkout"
+                onClick={() => dispatch(showCart())}
+                className="uppercase bg-gradient-to-tr from-orange-500 to-orange-600 text-white text-center font-semibold md:text-lg py-2 rounded-3xl"
+              >
+                Proceed to Check Out
               </Link>
             </div>
           </div>
