@@ -16,8 +16,9 @@ import { Link } from "react-router-dom"
 
 const CartUI = () => {
   const dispatch = useDispatch()
-  const { cartItems, cartTotalAmount, cartTotalQuantity, toggleCart } =
-    useSelector((state) => state.cart)
+  const { cartItems, cartTotalAmount, cartTotalQuantity } = useSelector(
+    (state) => state.cart
+  )
 
   const reversed = [...cartItems].reverse()
 
@@ -113,7 +114,7 @@ const CartUI = () => {
               <Link
                 to="/checkout"
                 onClick={() => dispatch(showCart())}
-                className="uppercase bg-gradient-to-tr from-orange-500 to-orange-600 text-white text-center font-semibold md:text-lg py-2 rounded-3xl"
+                className="uppercase tracking-wide bg-gradient-to-tr from-orange-500 to-orange-600 text-white text-center font-medium md:text-lg py-2 rounded-3xl hover:bg-gradient-to-tr hover:from-orange-300 hover:to-orange-500 transition-all duration-500 ease-in-out"
               >
                 Proceed to Check Out
               </Link>
