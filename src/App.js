@@ -4,6 +4,7 @@ import Header from "./components/Header"
 import Main from "./pages/Main"
 import CreateItem from "./pages/CreateItem"
 import Checkout from "./pages/Checkout"
+import NotFound from "./pages/NotFound"
 
 // firebase
 import { getAllFoodItems } from "./utils/firebaseFunctions"
@@ -17,7 +18,8 @@ import CartUI from "./components/cart/CartUI"
 
 function App() {
   const dispatch = useDispatch()
-  const { cartItems, toggleCart } = useSelector((state) => state.cart)
+  const { toggleCart } = useSelector((state) => state.cart)
+  const { user } = useSelector((state) => state.auth)
 
   const fetchFoodData = async () => {
     getAllFoodItems().then((data) => dispatch(getFoodItems(data)))
@@ -33,8 +35,11 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="create-item" element={<CreateItem />} />
+        {user.email === "romeomuralikrishnan@gmail.com" && (
+          <Route path="create-item" element={<CreateItem />} />
+        )}
         <Route path="checkout" element={<Checkout />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {toggleCart && <CartUI />}
     </>
