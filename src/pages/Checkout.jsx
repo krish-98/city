@@ -2,16 +2,14 @@ import React from "react"
 import { useSelector } from "react-redux"
 
 const Checkout = () => {
-  const { cartItems, cartTotalQuantity, cartTotalAmount } = useSelector(
-    (state) => state.cart
-  )
+  const { cartItems, cartTotalAmount } = useSelector((state) => state.cart)
 
   return (
-    <div className="h-screen flex flex-col items-center gap-8 pt-8 bg-primary">
-      <h3 className="text-4xl font-semibold">Checkout</h3>
+    <div className="h-[calc(100vh-80px)] flex flex-col items-center gap-8 pt-8 bg-primary">
+      <h3 className="text-4xl font-semibold lg:text-5xl">Checkout</h3>
 
-      <form className="w-full p-4">
-        <div className="flex flex-col gap-4 mb-8">
+      <form className="w-full p-4 md:w-[70%] lg:flex lg:items-center lg:gap-8 lg:justify-center lg:my-24">
+        <div className="flex flex-col gap-4 mb-8 lg:flex-1">
           <div className="w-full flex justify-between items-center">
             <label htmlFor="" className="w-[20%] text-right">
               Name
@@ -68,8 +66,8 @@ const Checkout = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center border">
-          <p className="text-xl font-semibold">Payment Method</p>
+        <div className="flex flex-col items-center lg:flex-1">
+          <p className="text-xl font-semibold lg:text-2xl">Payment Method</p>
 
           <div className="flex gap-6 my-4">
             <label htmlFor="online">
@@ -83,29 +81,34 @@ const Checkout = () => {
             </label>
           </div>
 
-          <div className="w-full">
-            <p className="text-lg">
-              Price:{" "}
-              <span className="font-semibold">
-                ${(cartTotalAmount + Number(30)).toFixed(2)}
-              </span>
-            </p>
+          {/* Total Section */}
+          <div className="w-full mb-4">
+            <div className="flex items-center justify-between">
+              <p className="text-lg">Item Total: </p>
+              <p className="font-semibold">${cartTotalAmount.toFixed(2)}</p>
+            </div>
 
-            <p className="text-lg">
-              Delivery charge: <span className="font-semibold">$30</span>
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="text-lg">Delivery charge:</p>
+              <p className="font-semibold">$30</p>
+            </div>
 
-            <p className="text-lg">
-              Total Cost:{" "}
-              <span className="font-semibold">
-                ${(cartTotalAmount + Number(30)).toFixed(2)}
-              </span>
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="text-lg flex flex-col">Total Cost: </p>
+              <div className="flex flex-col items-end justify-center">
+                <p className="font-semibold">
+                  ${(cartTotalAmount + Number(30)).toFixed(2)}
+                </p>
+                <p>{`Your order (${cartItems.length} ${
+                  cartItems.length === 1 ? "Item" : "Items"
+                })`}</p>
+              </div>
+            </div>
           </div>
 
           <button
             type="submit"
-            className="w-full uppercase tracking-wide bg-gradient-to-tr from-orange-500 to-orange-600 text-white text-center font-medium md:text-lg py-2 rounded-3xl hover:bg-gradient-to-tr hover:from-orange-300 hover:to-orange-500 transition-all duration-500 ease-in-out"
+            className="w-full uppercase tracking-wide bg-gradient-to-tr from-orange-500 to-orange-600 text-white text-center font-medium md:text-lg py-2 rounded-3xl hover:bg-gradient-to-tr hover:from-orange-300 hover:to-orange-500 transition-all duration-500 ease-in-out lg:w-[50%] lg:self-end"
           >
             Place Order
           </button>
