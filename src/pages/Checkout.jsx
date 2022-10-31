@@ -15,7 +15,7 @@ const Checkout = () => {
               Name
             </label>
             <input
-              className="w-[75%] py-2 px-3  focus:outline-none placeholder:text-sm rounded-lg"
+              className="w-[75%] py-2 px-3 border-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400 focus:bg-orange-100 placeholder:text-sm rounded-lg"
               type="text"
               placeholder="Mr.Miller"
             />
@@ -26,7 +26,7 @@ const Checkout = () => {
               Address
             </label>
             <input
-              className="w-[75%] py-2 px-3  focus:outline-none placeholder:text-sm rounded-lg"
+              className="w-[75%] py-2 px-3 border-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400 focus:bg-orange-100 placeholder:text-sm rounded-lg"
               type="text"
               placeholder="432, st.thomas street"
             />
@@ -37,7 +37,7 @@ const Checkout = () => {
               Pincode
             </label>
             <input
-              className="w-[75%] py-2 px-3  focus:outline-none placeholder:text-sm rounded-lg"
+              className="w-[75%] py-2 px-3 border-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400 focus:bg-orange-100 placeholder:text-sm rounded-lg"
               type="number"
               placeholder="501234"
             />
@@ -48,7 +48,7 @@ const Checkout = () => {
               City
             </label>
             <input
-              className="w-[75%] py-2 px-3  focus:outline-none placeholder:text-sm rounded-lg"
+              className="w-[75%] py-2 px-3 border-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400 focus:bg-orange-100 placeholder:text-sm rounded-lg"
               type="text"
               placeholder="Mumbai"
             />
@@ -59,7 +59,7 @@ const Checkout = () => {
               Phone Number
             </label>
             <input
-              className="w-[75%] py-2 px-3  focus:outline-none placeholder:text-sm rounded-lg"
+              className="w-[75%] py-2 px-3 border-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400 focus:bg-orange-100 placeholder:text-sm rounded-lg"
               type="number"
               placeholder="+91 9876543210"
             />
@@ -71,12 +71,24 @@ const Checkout = () => {
 
           <div className="flex gap-6 my-4">
             <label htmlFor="online">
-              <input type="radio" name="payment" value="online" id="online" />
+              <input
+                className="focus:outline-orange-400 focus:ring-orange-400 text-orange-400"
+                type="radio"
+                name="payment"
+                value="online"
+                id="online"
+              />
               <span className="ml-1">Online</span>
             </label>
 
             <label htmlFor="cod">
-              <input type="radio" name="payment" value="cod" id="cod" />
+              <input
+                className="focus:outline-orange-400 focus:ring-orange-400 text-orange-400"
+                type="radio"
+                name="payment"
+                value="cod"
+                id="cod"
+              />
               <span className="ml-1">COD</span>
             </label>
           </div>
@@ -108,7 +120,7 @@ const Checkout = () => {
 
           <button
             type="submit"
-            className="w-full uppercase tracking-wide bg-gradient-to-tr from-orange-500 to-orange-600 text-white text-center font-medium md:text-lg py-2 rounded-3xl hover:bg-gradient-to-tr hover:from-orange-300 hover:to-orange-500 transition-all duration-500 ease-in-out lg:w-[50%] lg:self-end"
+            className="w-full uppercase tracking-wide bg-gradient-to-tr from-orange-500 to-orange-600 text-white text-center font-medium md:text-lg py-2 rounded-3xl hover:bg-gradient-to-tr focus:outline-orange-400 hover:from-orange-300 hover:to-orange-500 transition-all duration-500 ease-in-out lg:w-[50%] lg:self-end"
           >
             Place Order
           </button>

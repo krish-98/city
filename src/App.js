@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { Routes, Route, useLocation } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import Header from "./components/Header"
 import Main from "./pages/Main"
 import CreateItem from "./pages/CreateItem"
@@ -18,7 +18,7 @@ import CartUI from "./components/cart/CartUI"
 
 function App() {
   const dispatch = useDispatch()
-  const { toggleCart } = useSelector((state) => state.cart)
+  const { toggleCart, cartItems } = useSelector((state) => state.cart)
   const { user } = useSelector((state) => state.auth)
 
   const fetchFoodData = async () => {
@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     fetchFoodData()
     dispatch(getTotals())
-  }, [])
+  }, [cartItems])
 
   return (
     <>
