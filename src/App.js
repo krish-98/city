@@ -15,6 +15,7 @@ import { getFoodItems } from "./features/foodSlice/foodSlice"
 import { getTotals } from "./features/cartSlice/cartSlice"
 
 import CartUI from "./components/cart/CartUI"
+import Orders from "./pages/Orders"
 
 function App() {
   const dispatch = useDispatch()
@@ -39,6 +40,7 @@ function App() {
           <Route path="create-item" element={<CreateItem />} />
         )}
         <Route path="checkout" element={<Checkout />} />
+        <Route path="orders" element={<Orders />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {toggleCart && <CartUI />}

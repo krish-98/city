@@ -2,14 +2,12 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { useFormik } from "formik"
 import * as Yup from "yup"
+import { useNavigate } from "react-router-dom"
 
 const Checkout = () => {
   const { cartItems, cartTotalAmount } = useSelector((state) => state.cart)
-  const radioOptions = [
-    { key: "Option 1", value: "value 1" },
-    { key: "Option 2", value: "value 2" },
-    { key: "Option 3", value: "value 3" },
-  ]
+  const navigate = useNavigate()
+
   const formik = useFormik({
     // Initial form values
     initialValues: {
@@ -39,6 +37,7 @@ const Checkout = () => {
     // Submit Form
     onSubmit: (values) => {
       console.log("Submitted")
+      navigate("/orders")
     },
   })
 
