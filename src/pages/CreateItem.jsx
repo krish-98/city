@@ -194,7 +194,7 @@ const CreateItem = () => {
           <IoFastFood className="w-5 h-5" />
           <input
             onChange={onChangeHandler}
-            className="outline-none w-full bg-primary placeholder:text-lg placeholder:bg-primary"
+            className="outline-none w-full bg-primary placeholder:text-lg placeholder:bg-primary border-none"
             type="text"
             name="title"
             value={inputFields.title}
@@ -266,7 +266,7 @@ const CreateItem = () => {
             <GiForkKnifeSpoon className="w-5 h-5" />
             <input
               onChange={onChangeHandler}
-              className="outline-none w-full bg-primary placeholder:text-lg placeholder:bg-primary"
+              className="outline-none w-full bg-primary placeholder:text-lg placeholder:bg-primary border-none focus:outline-none"
               type="text"
               name="calories"
               value={inputFields.calories}
@@ -278,7 +278,7 @@ const CreateItem = () => {
             <CgDollar className="w-5 h-5" />
             <input
               onChange={onChangeHandler}
-              className="outline-none w-full bg-primary placeholder:text-lg placeholder:bg-primary"
+              className="outline-none w-full bg-primary placeholder:text-lg placeholder:bg-primary border-none focus:outline-none"
               type="text"
               name="price"
               value={inputFields.price}

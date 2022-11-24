@@ -28,7 +28,7 @@ const Main = () => {
               <p className="inline-block text-orange-400 font-bold bg-orange-100 rounded-full px-3 py-1 drop-shadow-xl">
                 Bike Delivery
                 <img
-                  className="inline-block ml-2 w-8 h-8 object-contain bg-white rounded-full "
+                  className="inline-block ml-2 w-8 h-8 object-contain bg-white rounded-full"
                   src={Delivery}
                   alt="bike-delivery"
                 />
@@ -49,7 +49,7 @@ const Main = () => {
               repudiandae.
             </p>
 
-            <button className="bg-orange-400 py-3 px-6 rounded-lg ">
+            <button className="bg-orange-400 py-3 px-6 rounded-lg">
               Order Now
             </button>
           </section>

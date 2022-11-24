@@ -1,10 +1,12 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useNavigate } from "react-router-dom"
+import { clearCart } from "../features/cartSlice/cartSlice"
 
 const Checkout = () => {
+  const dispatch = useDispatch()
   const { cartItems, cartTotalAmount } = useSelector((state) => state.cart)
   const navigate = useNavigate()
 
@@ -38,6 +40,7 @@ const Checkout = () => {
     onSubmit: (values) => {
       console.log("Submitted")
       navigate("/orders")
+      dispatch(clearCart())
     },
   })
 
