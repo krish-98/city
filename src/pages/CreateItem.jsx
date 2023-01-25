@@ -44,7 +44,6 @@ const CreateItem = () => {
   const uploadImage = (e) => {
     setIsLoading(true)
     const imageFile = e.target.files[0]
-    console.log(imageFile)
     const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`) // Creating a path to the Firebase Storage
     const uploadTask = uploadBytesResumable(storageRef, imageFile)
 
@@ -98,6 +97,20 @@ const CreateItem = () => {
         setFields(false)
       }, 4000)
     })
+  }
+
+  const fetchFoodData = async () => {
+    await getAllFoodItems().then((data) => dispatch(getFoodItems(data)))
+  }
+
+  const clearFields = () => {
+    setInputFields({
+      title: "",
+      calories: "",
+      price: "",
+      category: "other",
+    })
+    setImageAsset(null)
   }
 
   const submitForm = (e) => {
@@ -154,21 +167,8 @@ const CreateItem = () => {
         setIsLoading(false)
       }, 4000)
     }
+
     fetchFoodData()
-  }
-
-  const clearFields = () => {
-    setInputFields({
-      title: "",
-      calories: "",
-      price: "",
-      category: "other",
-    })
-    setImageAsset(null)
-  }
-
-  const fetchFoodData = async () => {
-    getAllFoodItems().then((data) => dispatch(getFoodItems(data)))
   }
 
   return (
@@ -177,6 +177,7 @@ const CreateItem = () => {
         onSubmit={submitForm}
         className="flex flex-col items-center justify-center gap-6 w-[90%] md:max-w-[768px] px-4 py-6 border border-gray-300 rounded-xl"
       >
+        {imageAsset}
         {fields && (
           <p
             className={`text-xl text-green-500 font-bold ${
@@ -190,11 +191,12 @@ const CreateItem = () => {
         {progress && (
           <h1 className="font-semibold text-green-300">{progress}</h1>
         )}
+
         <div className="flex items-center gap-2 border-b border-b-gray-300 py-2 w-full">
           <IoFastFood className="w-5 h-5" />
           <input
             onChange={onChangeHandler}
-            className="outline-none w-full bg-primary placeholder:text-lg placeholder:bg-primary border-none"
+            className="outline-none border-none w-full bg-primary placeholder:text-lg placeholder:bg-primary focus:ring-cartNumBg"
             type="text"
             name="title"
             value={inputFields.title}
@@ -206,7 +208,7 @@ const CreateItem = () => {
           onChange={onChangeHandler}
           name="category"
           // value={inputFields.category}
-          className="w-full p-2 outline-none rounded-lg cursor-pointer"
+          className="border-none w-full p-2 outline-none rounded-lg cursor-pointer focus:ring-cartNumBg"
         >
           <option value="other">Select Category</option>
           {categories &&
@@ -266,7 +268,7 @@ const CreateItem = () => {
             <GiForkKnifeSpoon className="w-5 h-5" />
             <input
               onChange={onChangeHandler}
-              className="outline-none w-full bg-primary placeholder:text-lg placeholder:bg-primary border-none focus:outline-none"
+              className="outline-none border-none w-full bg-primary placeholder:text-lg placeholder:bg-primary   focus:ring-cartNumBg"
               type="text"
               name="calories"
               value={inputFields.calories}
@@ -278,7 +280,7 @@ const CreateItem = () => {
             <CgDollar className="w-5 h-5" />
             <input
               onChange={onChangeHandler}
-              className="outline-none w-full bg-primary placeholder:text-lg placeholder:bg-primary border-none focus:outline-none"
+              className="outline-none border-none w-full bg-primary placeholder:text-lg placeholder:bg-primary   focus:ring-cartNumBg"
               type="text"
               name="price"
               value={inputFields.price}

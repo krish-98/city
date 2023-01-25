@@ -11,7 +11,7 @@ const MenuContainer = () => {
   const { foodItems } = useSelector((state) => state.food)
 
   return (
-    <div>
+    <section id="menu">
       <h2 className="text-2xl font-semibold relative before:content-[''] before:absolute before:top-9 before:w-32 before:h-[.3rem] before:bg-gradient-to-r before:from-orange-400 before:to-orange-300 before:rounded-lg">
         Our Hot Dishes
       </h2>
@@ -55,7 +55,7 @@ const MenuContainer = () => {
         flag={false}
         data={foodItems?.filter((item) => item.category === active)}
       />
-    </div>
+    </section>
   )
 }
 

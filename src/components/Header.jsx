@@ -19,8 +19,6 @@ const Header = () => {
   const { user } = useSelector((state) => state.auth)
   const { cartItems, cartTotalQuantity } = useSelector((state) => state.cart)
 
-  // console.log(user)
-
   useEffect(() => {}, [cartItems, cartTotalQuantity])
 
   const handleSignIn = () => {
@@ -119,10 +117,10 @@ const Header = () => {
             className="flex items-center gap-8 text-textColor "
           >
             <li>
-              <a href="/">Home</a>
+              <a href="#home">Home</a>
             </li>
             <li>
-              <a href="/">Menu</a>
+              <a href="#menu">Menu</a>
             </li>
             <li>
               <a href="/">About Us</a>
