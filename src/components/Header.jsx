@@ -43,7 +43,7 @@ const Header = () => {
   return (
     <>
       {/* Mobile Navbar */}
-      <nav className="md:hidden flex items-center justify-between py-3 px-5 bg-primary sticky top-0 z-40">
+      <nav className="md:hidden flex items-center justify-between py-4 px-5 bg-primary sticky top-0 z-40">
         <motion.div
           whileTap={{ scale: 0.75 }}
           onClick={() => dispatch(showCart())}

@@ -97,16 +97,16 @@ const CartUI = () => {
           {/* Total Section */}
           <div className="bg-gray-600 rounded-t-[2rem] p-8 absolute bottom-0 left-0 right-0 h-[45%] flex flex-col justify-center">
             <div className="flex flex-col gap-7">
-              <div className="flex justify-between text-xl text-cardOverlay">
+              <div className="flex justify-between text-cardOverlay">
                 <p>Sub Total</p>
                 <p>$ {cartTotalAmount.toFixed(2)}</p>
               </div>
-              <div className="flex justify-between text-xl text-cardOverlay">
+              <div className="flex justify-between text-cardOverlay">
                 <p>Delivery</p>
                 <p>$ 30</p>
               </div>
               <hr />
-              <div className="flex justify-between text-xl font-semibold text-white">
+              <div className="flex justify-between font-semibold text-white">
                 <p>Total</p>
                 <p>$ {(cartTotalAmount + 30).toFixed(2)}</p>
               </div>
@@ -114,7 +114,7 @@ const CartUI = () => {
               <Link
                 to="/checkout"
                 onClick={() => dispatch(showCart())}
-                className="uppercase tracking-wide bg-gradient-to-tr from-orange-500 to-orange-600 text-white text-center font-medium md:text-lg py-2 rounded-3xl hover:bg-gradient-to-tr hover:from-orange-300 hover:to-orange-500 transition-all duration-500 ease-in-out"
+                className="uppercase tracking-wide bg-gradient-to-tr from-orange-500 to-orange-600 text-white text-center font-medium py-2 rounded-3xl hover:bg-gradient-to-tr hover:from-orange-300 hover:to-orange-500 transition-all duration-500 ease-in-out"
               >
                 Proceed to Check Out
               </Link>

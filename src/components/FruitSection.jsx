@@ -14,6 +14,7 @@ const FruitSection = () => {
   const scrollTo = (scrollOffset) => {
     rowContainerRef.current.scrollLeft += scrollOffset
   }
+
   return (
     <section className="my-12">
       <div className="flex justify-between items-center">
