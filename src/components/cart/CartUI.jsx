@@ -1,8 +1,9 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { AiOutlineClear, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 import { BsArrowLeft } from "react-icons/bs"
 import EmptyCart from "../../assets/emptyCart.svg"
+import { FcGoogle } from "react-icons/fc"
 
 import { useDispatch, useSelector } from "react-redux"
 import {
@@ -13,14 +14,25 @@ import {
   showCart,
 } from "../../features/cartSlice/cartSlice"
 import { Link } from "react-router-dom"
+import { signIn } from "../../features/authSlice/authSlice"
 
 const CartUI = () => {
+  const [toggle, setToggle] = useState(false)
   const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
   const { cartItems, cartTotalAmount, cartTotalQuantity } = useSelector(
     (state) => state.cart
   )
 
   const reversed = [...cartItems].reverse()
+
+  const handleSignIn = () => {
+    if (!user.uid) {
+      dispatch(signIn())
+    } else if (user.uid) {
+      setToggle(!toggle)
+    }
+  }
 
   useEffect(() => {
     dispatch(getTotals())
@@ -111,13 +123,23 @@ const CartUI = () => {
                 <p>$ {(cartTotalAmount + 30).toFixed(2)}</p>
               </div>
 
-              <Link
-                to="/checkout"
-                onClick={() => dispatch(showCart())}
-                className="uppercase tracking-wide bg-gradient-to-tr from-orange-500 to-orange-600 text-white text-center font-medium py-2 rounded-3xl hover:bg-gradient-to-tr hover:from-orange-300 hover:to-orange-500 transition-all duration-500 ease-in-out"
-              >
-                Proceed to Check Out
-              </Link>
+              {!user?.uid ? (
+                <div
+                  onClick={handleSignIn}
+                  className="bg-white text-[#3f7ee8] py-3 rounded-lg flex items-center justify-center gap-2  hover:bg-orange-300 hover:text-white cursor-pointer transition-all duration-300 ease-in-out  "
+                >
+                  <FcGoogle size={"1.3rem"} />
+                  <p> Sign In to Continue</p>
+                </div>
+              ) : (
+                <Link
+                  to="/checkout"
+                  onClick={() => dispatch(showCart())}
+                  className="uppercase tracking-wide bg-gradient-to-tr from-orange-500 to-orange-600 text-white text-center font-medium py-2 rounded-3xl hover:bg-gradient-to-tr hover:from-orange-300 hover:to-orange-500 transition-all duration-500 ease-in-out"
+                >
+                  Proceed to Check Out
+                </Link>
+              )}
             </div>
           </div>
         </div>

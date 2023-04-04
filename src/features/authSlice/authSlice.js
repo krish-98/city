@@ -16,7 +16,7 @@ export const signIn = createAsyncThunk("auth/signIn", async () => {
   const googleProvider = new GoogleAuthProvider()
 
   const userCredential = await signInWithPopup(auth, googleProvider)
-  const user = userCredential.user.providerData[0]
+  const user = userCredential?.user?.providerData[0]
 
   localStorage.setItem("userInfo", JSON.stringify(user))
 

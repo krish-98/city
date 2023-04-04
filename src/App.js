@@ -33,7 +33,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
-        {user.email === "romeomuralikrishnan@gmail.com" && (
+        {user?.email === "romeomuralikrishnan@gmail.com" && (
           <Route path="create-item" element={<CreateItem />} />
         )}
         <Route path="checkout" element={<Checkout />} />
