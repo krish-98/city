@@ -1,9 +1,11 @@
 import React from "react"
+import { useNavigate } from "react-router-dom"
+
 import { useDispatch, useSelector } from "react-redux"
+import { clearCart } from "../features/cartSlice/cartSlice"
+
 import { useFormik } from "formik"
 import * as Yup from "yup"
-import { useNavigate } from "react-router-dom"
-import { clearCart } from "../features/cartSlice/cartSlice"
 
 const Checkout = () => {
   const dispatch = useDispatch()

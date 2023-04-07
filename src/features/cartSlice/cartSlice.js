@@ -13,7 +13,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    showCart: (state, action) => {
+    showCart: (state) => {
       state.toggleCart = !state.toggleCart
     },
 
@@ -25,7 +25,6 @@ const cartSlice = createSlice({
       // To check whether the obj is already present in the array or not
       if (itemIndex >= 0) {
         state.cartItems[itemIndex].qty += 1
-        console.log(action.payload)
       } else {
         state.cartItems.push(action.payload)
       }
@@ -63,13 +62,13 @@ const cartSlice = createSlice({
       }
     },
 
-    clearCart: (state, action) => {
+    clearCart: (state) => {
       state.cartItems = []
 
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
     },
 
-    getTotals: (state, action) => {
+    getTotals: (state) => {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
           const { price, qty } = cartItem

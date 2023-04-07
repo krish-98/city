@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { categories } from "../utils/categories"
 
-// Icons
 import { IoFastFood } from "react-icons/io5"
 import { GoCloudUpload } from "react-icons/go"
 import { GiForkKnifeSpoon } from "react-icons/gi"

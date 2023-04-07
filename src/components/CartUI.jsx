@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import EmptyCart from "../assets/emptyCart.svg"
+
 import { AiOutlineClear, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 import { BsArrowLeft } from "react-icons/bs"
-import EmptyCart from "../../assets/emptyCart.svg"
 import { FcGoogle } from "react-icons/fc"
 
 import { useDispatch, useSelector } from "react-redux"
@@ -12,9 +14,8 @@ import {
   getTotals,
   increaseQty,
   showCart,
-} from "../../features/cartSlice/cartSlice"
-import { Link } from "react-router-dom"
-import { signIn } from "../../features/authSlice/authSlice"
+} from "../features/cartSlice/cartSlice"
+import { signIn } from "../features/authSlice/authSlice"
 
 const CartUI = () => {
   const [toggle, setToggle] = useState(false)

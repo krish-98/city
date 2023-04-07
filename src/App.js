@@ -1,15 +1,10 @@
 import { useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
-import Header from "./components/Header"
-import CartUI from "./components/cart/CartUI"
-
-import Main from "./pages/Main"
-import CreateItem from "./pages/CreateItem"
-import Checkout from "./pages/Checkout"
-import Orders from "./pages/Orders"
-import NotFound from "./pages/NotFound"
+import { Header, CartUI } from "./components"
+import { Main, CreateItem, Checkout, Orders, NotFound } from "./pages"
 
 import { getAllFoodItems } from "./utils/firebaseFunctions"
+
 import { useDispatch, useSelector } from "react-redux"
 import { getFoodItems } from "./features/foodSlice/foodSlice"
 import { getTotals } from "./features/cartSlice/cartSlice"
