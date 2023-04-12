@@ -4,7 +4,7 @@ import Error from "../assets/404.png"
 
 const NotFound = () => {
   return (
-    <div className="h-[calc(100vh-104px)] flex flex-col items-center justify-center gap-6 bg-primary ]">
+    <div className="h-[calc(100vh-83.83px)] flex flex-col items-center justify-center gap-6 bg-primary">
       <img className="w-[30%] md:max-w-[250px]" src={Error} alt="404 Error" />
       <h1 className="text-2xl">Oops! No such page found!</h1>
       <Link

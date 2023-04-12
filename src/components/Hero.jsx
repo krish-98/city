@@ -33,7 +33,7 @@ const Hero = () => {
           consequuntur animi placeat libero obcaecati repudiandae.
         </p>
 
-        <button className="bg-orange-400 py-3 px-6 rounded-lg">
+        <button className="bg-orange-400 py-3 px-6 rounded-lg text-white">
           Order Now
         </button>
       </div>

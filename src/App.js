@@ -14,14 +14,14 @@ function App() {
   const { toggleCart, cartItems } = useSelector((state) => state.cart)
   const { user } = useSelector((state) => state.auth)
 
-  const fetchFoodData = async () => {
+  const fetchFoodData = () => {
     getAllFoodItems().then((data) => dispatch(getFoodItems(data)))
   }
 
   useEffect(() => {
     fetchFoodData()
     dispatch(getTotals())
-  }, [cartItems])
+  }, [cartItems, dispatch])
 
   return (
     <>

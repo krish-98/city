@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import { IoMdBasket } from "react-icons/io"
 import { CgDollar } from "react-icons/cg"
 import NotFound from "../assets/NotFound.svg"
+
 import { useDispatch } from "react-redux"
 import { addToCart } from "../features/cartSlice/cartSlice"
 
@@ -12,7 +13,7 @@ const RowContainer = ({ flag, rowContainerRef, data }) => {
   return (
     <div
       ref={rowContainerRef}
-      className={`w-full my-12 flex items-center gap-4 scroll-smooth ${
+      className={`w-full my-12 flex items-center gap-6 scroll-smooth ${
         flag
           ? "overflow-x-scroll scrollbar-none"
           : "overflow-x-hidden flex-wrap justify-center"
@@ -53,9 +54,7 @@ const RowContainer = ({ flag, rowContainerRef, data }) => {
           </div>
         ))
       ) : (
-        <>
-          <img className="w-[30%] mx-auto" src={NotFound} alt="not found" />
-        </>
+        <img className="w-[30%] mx-auto" src={NotFound} alt="not found" />
       )}
     </div>
   )

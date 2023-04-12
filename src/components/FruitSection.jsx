@@ -1,14 +1,13 @@
-import { motion } from "framer-motion"
 import { useRef } from "react"
+import { motion } from "framer-motion"
+import RowContainer from "../components/RowContainer"
 
 import { IoIosArrowForward } from "react-icons/io"
 import { IoIosArrowBack } from "react-icons/io"
 import { useSelector } from "react-redux"
-import RowContainer from "../components/RowContainer"
 
 const FruitSection = () => {
   const rowContainerRef = useRef()
-
   const { foodItems } = useSelector((state) => state.food)
 
   const scrollTo = (scrollOffset) => {

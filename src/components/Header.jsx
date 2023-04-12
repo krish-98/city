@@ -52,9 +52,11 @@ const Header = () => {
         >
           <MdShoppingBasket className="w-7 h-6 text-textColor" />
           {cartTotalQuantity > 0 && (
-            <span className="absolute bottom-4 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm font-medium">
-              {cartTotalQuantity}
-            </span>
+            <div className="absolute bottom-4 left-[10px] bg-cartNumBg px-[8px] py-[1px] rounded-full">
+              <span className="text-white text-sm font-medium">
+                {cartTotalQuantity}
+              </span>
+            </div>
           )}
         </motion.div>
 
@@ -138,9 +140,11 @@ const Header = () => {
           >
             <MdShoppingBasket className="w-7 h-6 text-textColor" />
             {cartTotalQuantity > 0 && (
-              <span className="absolute bottom-4 left-3 bg-cartNumBg w-6 h-6 text-center rounded-full text-white text-sm">
-                {cartTotalQuantity}
-              </span>
+              <div className="absolute bottom-4 left-[10px] bg-cartNumBg px-[8px] py-[1px] rounded-full">
+                <span className="text-white text-sm font-medium">
+                  {cartTotalQuantity}
+                </span>
+              </div>
             )}
           </motion.div>
 
